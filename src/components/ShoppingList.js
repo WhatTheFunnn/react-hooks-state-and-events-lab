@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Item from "./Item";
 
-function ShoppingList({ items, selectedCategory, setSelectedCategory}) {
+function ShoppingList({ items }) {
+
+   const [selectedCategory, setSelectedCategory] = useState("All")
   
-  function sort(event) {
+   function sort(event) {
     setSelectedCategory(event.target.value)
-    console.log(selectedCategory)
   }
+
+  const groceryFilter = items.filter((item) => {
+      if(selectedCategory !== "All"){
+        return item.category === selectedCategory
+      }
+      else {
+        return true
+      }
+  })
 
   return (
     <div className="ShoppingList">
@@ -19,7 +29,7 @@ function ShoppingList({ items, selectedCategory, setSelectedCategory}) {
         </select>
       </div>
       <ul className="Items">
-        {items.map((item) => (
+        {groceryFilter.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
         ))}
       </ul>

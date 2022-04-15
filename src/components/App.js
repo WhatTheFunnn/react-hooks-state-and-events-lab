@@ -6,16 +6,14 @@ import itemData from "../data/items";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState("")
+  const [items, setItems] = useState(itemData)
 
   function darkmode() {
       setIsDarkMode((isDarkMode) => !isDarkMode)
   }
 
   const appClass = isDarkMode ? "App dark" : "App light"
-  const item1 = itemData.filter({selectedCategory})
-   console.log(item1)
-    
+
   return (
     <div className={appClass}>
       <header>
@@ -23,7 +21,7 @@ function App() {
         <button onClick={darkmode}>{isDarkMode ? "Dark" : "Light"} Mode</button>
         
       </header>
-      <ShoppingList items={itemData} item1={item1} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+      <ShoppingList items={items} />
     </div>
   );
 }
